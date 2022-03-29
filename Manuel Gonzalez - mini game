@@ -1,0 +1,50 @@
+""" This is a code that plays the ROCK, PAPER, SCISSORS """
+# From the random module we import the function randint (random integer) which we will use for the computer
+# later to choose randomly among the possible choices of the game
+
+from random import randint
+
+# We create a list in which we include the three options that both our user and the computer will have to choose from
+
+options = ["ROCK", "PAPER", "SCISSORS"]
+
+# Now we create a dictionary with 3 different keys
+# that will communicate whether the user has won, lost or neither (get a tie)
+# In order to that, we create three keys (Tie, won or lost) and its respective values (a string with a message)
+
+message = {
+  "tie" : "Yawn it's a tie!",
+  "won" : "Yay you won",
+  "lost": "Aww you lost!"
+}
+# Now we proceed through if else statements and string formatting to define a function that will take two values, 
+# will print both choices picked from our list options by user and computer,
+# and will compare each of the possible combinations that would make our user win and get a tie,
+# printing lost for all the rest of combinations (for which the computer would win)
+
+def decide_winner(user_choice, computer_choice):
+  print "You selected %s " % user_choice
+  print "user_computer %s " % computer_choice
+  if user_choice == computer_choice:
+    print message["tie"]  
+  elif user_choice == options[0] and computer_choice == options[2]:
+    print message["won"]
+  elif user_choice == options[1] and computer_choice == options[0]:
+    print message["won"]
+  elif user_choice == options[2] and computer_choice == options[1]:
+    print message["won"]
+  else:
+    print message["lost"]
+
+# We define a second function that will 
+# prompt our user to type in one of the choices from the list options using the built in functions raw_input and .upper(). The
+# latter one will convert the input into uppercase in case our user types in lowercase any of the options.
+# On the other hand, this function we're defining will also make 
+# the variable computer_choice equal to a random choice from the listed options thanks to function randint that we previously imported from the module random
+
+def play_RPS():
+  user_choice = raw_input("Enter ROCK, PAPER or SCISSORS: ").upper()
+  computer_choice = options[randint(0,2)]
+  decide_winner(user_choice, computer_choice)
+
+play_RPS()
